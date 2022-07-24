@@ -1,4 +1,4 @@
-package com.example.twotasksb2.utils;
+package com.example.twotasksb2.utils.pojos;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
