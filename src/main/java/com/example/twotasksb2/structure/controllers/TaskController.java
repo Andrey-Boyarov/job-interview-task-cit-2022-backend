@@ -1,7 +1,9 @@
 package com.example.twotasksb2.structure.controllers;
 
 import com.example.twotasksb2.structure.services.TaskService;
+import com.example.twotasksb2.tasks.TaskEnum;
 import com.example.twotasksb2.utils.pojos.InputOneRequestPojo;
+import com.example.twotasksb2.utils.pojos.InputTwoRequestPojo;
 import com.example.twotasksb2.utils.pojos.Option;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -26,10 +28,18 @@ public class TaskController {
     }
 
     @PostMapping("/calculate/1")
-    public ResponseEntity<String> calculate(
+    public ResponseEntity<String> calculateTaskOne(
             @RequestBody InputOneRequestPojo pojo
             ){
-        Long taskId = 1L;
+        Long taskId = TaskEnum.ARRAYS.getCode();
+        return taskService.calculate(taskId, pojo);
+    }
+
+    @PostMapping("/calculate/2")
+    public ResponseEntity<String> calculateTaskTwo(
+            @RequestBody InputTwoRequestPojo pojo
+            ){
+        Long taskId = TaskEnum.MAGIC_SQUARE.getCode();
         return taskService.calculate(taskId, pojo);
     }
 }
