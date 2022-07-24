@@ -29,7 +29,7 @@ public class TaskController {
     public ResponseEntity<String> calculate(
             @RequestBody InputOneRequestPojo pojo
             ){
-        Long taskId = 2L;
+        Long taskId = 1L;
         return taskService.calculate(taskId, pojo);
     }
 }
