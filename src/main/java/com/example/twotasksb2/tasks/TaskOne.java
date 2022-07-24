@@ -2,13 +2,27 @@ package com.example.twotasksb2.tasks;
 
 import com.example.twotasksb2.structure.entities.DictTask;
 import com.example.twotasksb2.utils.pojos.InputOneRequestPojo;
+import com.example.twotasksb2.utils.pojos.Option;
 import lombok.AllArgsConstructor;
+
+import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @AllArgsConstructor
 public class TaskOne implements Task{
     private final InputOneRequestPojo input;
+
     @Override
     public String calculate() {
-        return "calculated";
+        List<String> two = input.getTwo().stream().map(Option::getLabel).collect(Collectors.toList());
+        Predicate<String> isInTwo = s -> two.stream().anyMatch(t -> t.contains(s));
+
+        return input.getOne().stream()
+                .map(Option::getLabel)
+                .filter(isInTwo)
+                .sorted(String::compareTo)
+                .collect(Collectors.joining(", "));
     }
 }
