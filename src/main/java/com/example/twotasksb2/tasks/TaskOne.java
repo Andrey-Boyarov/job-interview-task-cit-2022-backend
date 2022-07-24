@@ -20,10 +20,11 @@ public class TaskOne implements Task{
         List<String> two = input.getTwo().stream().map(Option::getLabel).collect(Collectors.toList());
         Predicate<String> isInTwo = s -> two.stream().anyMatch(t -> t.contains(s));
 
-        return input.getOne().stream()
+        String res = input.getOne().stream()
                 .map(Option::getLabel)
                 .filter(isInTwo) // filter string by containing in any string from list two
                 .sorted(String::compareTo) // lexicographically sorted (default for strings)
                 .collect(Collectors.joining(", "));
+        return res.isEmpty() ? "No strings from array one are contained in strings of array two" : res;
     }
 }
