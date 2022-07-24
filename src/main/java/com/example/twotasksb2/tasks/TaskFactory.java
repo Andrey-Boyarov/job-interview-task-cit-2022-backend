@@ -18,13 +18,13 @@ public class TaskFactory {
 //        else if (TaskEnum.MAGIC_SQUARE.getCode().equals(id)) {
 //            return null; //todo TaskTwo
 //        }
-        new TaskFactoryNoSuchTaskCodeException("No such code for task exists").printStackTrace();
+        new NoSuchTaskCodeException("No such code for task exists").printStackTrace();
         return null;
     }
 
 
-    private static class TaskFactoryNoSuchTaskCodeException extends Exception{
-        public TaskFactoryNoSuchTaskCodeException(String message){
+    private static class NoSuchTaskCodeException extends Exception{
+        public NoSuchTaskCodeException(String message){
             super(message);
         }
     }
