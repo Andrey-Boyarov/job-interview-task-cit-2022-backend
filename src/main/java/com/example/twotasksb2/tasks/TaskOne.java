@@ -1,6 +1,5 @@
 package com.example.twotasksb2.tasks;
 
-import com.example.twotasksb2.structure.entities.DictTask;
 import com.example.twotasksb2.utils.pojos.InputOneRequestPojo;
 import com.example.twotasksb2.utils.pojos.Option;
 import lombok.AllArgsConstructor;
@@ -8,8 +7,10 @@ import lombok.AllArgsConstructor;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
+/**
+ * Object of task one - strings from array one included in strings from array two in lexicographical order
+ */
 @AllArgsConstructor
 public class TaskOne implements Task{
     private final InputOneRequestPojo input;
@@ -21,8 +22,8 @@ public class TaskOne implements Task{
 
         return input.getOne().stream()
                 .map(Option::getLabel)
-                .filter(isInTwo)
-                .sorted(String::compareTo)
+                .filter(isInTwo) // filter string by containing in any string from list two
+                .sorted(String::compareTo) // lexicographically sorted (default for strings)
                 .collect(Collectors.joining(", "));
     }
 }
