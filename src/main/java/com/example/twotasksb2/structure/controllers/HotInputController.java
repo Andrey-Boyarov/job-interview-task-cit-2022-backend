@@ -28,4 +28,10 @@ public class HotInputController {
     public ResponseEntity<List<Option>> getByTask(@PathVariable Long taskCode){
         return new ResponseEntity<>(hotInputService.getOptionsByTaskCode(taskCode), HttpStatus.OK);
     }
+
+    @DeleteMapping("/delete/{inputId}")
+    public ResponseEntity<HttpStatus> delete(@PathVariable Long inputId){
+        hotInputService.delete(inputId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

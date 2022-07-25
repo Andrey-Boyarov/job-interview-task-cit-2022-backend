@@ -24,4 +24,8 @@ public class HotInputService {
         return hotInputRepository.findAllByTask(dictTaskRepository.findByCode(taskCode)).stream()
                 .map(t -> new Option(t.getId(), t.getInput())).collect(Collectors.toList());
     }
+
+    public void delete(Long id){
+        hotInputRepository.delete(hotInputRepository.findById(id).get());
+    }
 }
