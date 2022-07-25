@@ -25,11 +25,8 @@ public class FileController {
         if (file == null) throw new RuntimeException("You must select a file for uploading");
         String json = new String (file.getInputStream().readAllBytes(), StandardCharsets.UTF_8);
 
-        TaskPojo pojo = null;
-        if (TaskEnum.ARRAYS.getCode().equals(taskCode)) pojo = AdapterUtils.getPojoForTaskOne(json);
-        if (TaskEnum.MAGIC_SQUARE.getCode().equals(taskCode)) pojo = AdapterUtils.getPojoForTaskTwo(json);
         String ans = "Input:\n"
-                + AdapterUtils.beautyVersion(pojo)
+                + AdapterUtils.beautyVersion(json, taskCode)
                 + "\n\nResult:\n" + taskService.calculate(taskCode, json);
         return new ResponseEntity<>(ans, HttpStatus.OK);
     }

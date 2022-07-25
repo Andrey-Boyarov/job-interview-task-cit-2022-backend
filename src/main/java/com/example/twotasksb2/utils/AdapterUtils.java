@@ -1,5 +1,6 @@
 package com.example.twotasksb2.utils;
 
+import com.example.twotasksb2.tasks.TaskEnum;
 import com.example.twotasksb2.utils.pojos.InputOneRequestPojo;
 import com.example.twotasksb2.utils.pojos.InputTwoRequestPojo;
 import com.example.twotasksb2.utils.pojos.Option;
@@ -26,6 +27,22 @@ public class AdapterUtils {
         }
         if (pojo instanceof InputTwoRequestPojo) {
             InputTwoRequestPojo p = (InputTwoRequestPojo) pojo;
+            return stringFromSquare(p.getCurrentData());
+        }
+        return "Error at beautifying extracted input";
+    }
+
+    /**
+     *  Converts TaskPojo to a bit more beautiful string than it's JSON view
+     */
+    public static String beautyVersion(String json, Long taskCode){
+        if (TaskEnum.ARRAYS.getCode().equals(taskCode)) {
+            InputOneRequestPojo p = getPojoForTaskOne(json);
+            return "First array: " + p.getOne().stream().map(Option::getLabel).collect(Collectors.joining(", "))
+                    + "\nSecond array: " + p.getTwo().stream().map(Option::getLabel).collect(Collectors.joining(", "));
+        }
+        if (TaskEnum.MAGIC_SQUARE.getCode().equals(taskCode)) {
+            InputTwoRequestPojo p = getPojoForTaskTwo(json);
             return stringFromSquare(p.getCurrentData());
         }
         return "Error at beautifying extracted input";

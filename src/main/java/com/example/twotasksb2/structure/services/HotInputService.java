@@ -30,7 +30,7 @@ public class HotInputService {
 
     public List<Option> getOptionsByTaskCode(Long taskCode){
         return hotInputRepository.findAllByTask(dictTaskRepository.findByCode(taskCode)).stream()
-                .map(t -> new Option(t.getId(), t.getInput())).collect(Collectors.toList());
+                .map(t -> new Option(t.getId(), AdapterUtils.beautyVersion(t.getInput(), taskCode))).collect(Collectors.toList());
     }
 
     public void delete(Long id){
