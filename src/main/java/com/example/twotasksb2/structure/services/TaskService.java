@@ -28,8 +28,8 @@ public class TaskService {
         return res == null ? new ResponseEntity<>(HttpStatus.NO_CONTENT) : new ResponseEntity<>(res, HttpStatus.OK);
     }
 
-    public ResponseEntity<String> calculate(Long taskId, TaskPojo pojo){
-        return new ResponseEntity<>(taskFactory.create(taskId, pojo).calculate(), HttpStatus.OK);
+    public String calculate(Long taskId, TaskPojo pojo){
+        return taskFactory.create(taskId, pojo).calculate();
     }
 
     private Long getInputTypeById(Long id){

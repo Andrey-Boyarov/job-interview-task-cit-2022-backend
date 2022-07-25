@@ -34,4 +34,9 @@ public class HotInputController {
         hotInputService.delete(inputId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @GetMapping("/calculate/{inputId}")
+    public ResponseEntity<String> calculate(@PathVariable Long inputId){
+        return new ResponseEntity<>(hotInputService.calculate(inputId), HttpStatus.OK);
+    }
 }

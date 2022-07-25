@@ -1,14 +1,64 @@
 package com.example.twotasksb2.utils;
 
+import com.example.twotasksb2.utils.pojos.InputOneRequestPojo;
+import com.example.twotasksb2.utils.pojos.InputTwoRequestPojo;
+import com.example.twotasksb2.utils.pojos.Option;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
  *  Class for any adapter design pattern implementations
  */
 public class AdapterUtils {
+
+    /**
+     *  Converts TaskPojo to a bit more beautiful string than it's JSON view
+     */
+    public static String beautyVersion(TaskPojo pojo){
+        if (pojo instanceof InputOneRequestPojo) {
+            InputOneRequestPojo p = (InputOneRequestPojo) pojo;
+            return "First array: " + p.getOne().stream().map(Option::getLabel).collect(Collectors.joining(", "))
+                    + "\nSecond array: " + p.getTwo().stream().map(Option::getLabel).collect(Collectors.joining(", "));
+        }
+        if (pojo instanceof InputTwoRequestPojo) {
+            InputTwoRequestPojo p = (InputTwoRequestPojo) pojo;
+            return stringFromSquare(p.getCurrentData());
+        }
+        return "Error at beautifying extracted input";
+    }
+
+    /**
+     *  Converts JSON to InputOneRequestPojo
+     */
+    public static InputOneRequestPojo getPojoForTaskOne(String s){
+        ObjectMapper mapper = new ObjectMapper();
+        InputOneRequestPojo ans = null;
+        try {
+            ans = mapper.readValue(s, InputOneRequestPojo.class);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return ans;
+    }
+
+    /**
+     *  Converts JSON to InputTwoRequestPojo
+     */
+    public static InputTwoRequestPojo getPojoForTaskTwo(String s){
+        ObjectMapper mapper = new ObjectMapper();
+        InputTwoRequestPojo ans = null;
+        try {
+            ans = mapper.readValue(s, InputTwoRequestPojo.class);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return ans;
+    }
+
     /**
      *  Returns square from a flat list
      */

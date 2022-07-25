@@ -6,6 +6,7 @@ import com.example.twotasksb2.utils.pojos.InputOneRequestPojo;
 import com.example.twotasksb2.utils.pojos.InputTwoRequestPojo;
 import com.example.twotasksb2.utils.pojos.Option;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,7 +33,7 @@ public class TaskController {
             @RequestBody InputOneRequestPojo pojo
             ){
         Long taskId = TaskEnum.ARRAYS.getCode();
-        return taskService.calculate(taskId, pojo);
+        return new ResponseEntity<>(taskService.calculate(taskId, pojo), HttpStatus.OK);
     }
 
     @PostMapping("/calculate/2")
@@ -40,6 +41,6 @@ public class TaskController {
             @RequestBody InputTwoRequestPojo pojo
             ){
         Long taskId = TaskEnum.MAGIC_SQUARE.getCode();
-        return taskService.calculate(taskId, pojo);
+        return new ResponseEntity<>(taskService.calculate(taskId, pojo), HttpStatus.OK);
     }
 }
