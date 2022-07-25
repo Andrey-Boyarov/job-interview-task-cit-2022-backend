@@ -10,5 +10,5 @@ CREATE TABLE hot_input
 (
     id bigint primary key,
     task_code bigint,
-    input varchar (250)
+    input char(1000)
 );

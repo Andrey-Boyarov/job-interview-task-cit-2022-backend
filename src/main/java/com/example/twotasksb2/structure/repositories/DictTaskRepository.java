@@ -8,4 +8,5 @@ import java.util.List;
 
 @Repository
 public interface DictTaskRepository extends JpaRepository<DictTask, Long> {
+    DictTask findByCode(Long code);
 }

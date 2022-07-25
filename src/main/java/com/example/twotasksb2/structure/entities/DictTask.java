@@ -7,13 +7,14 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Table(name = "dict_task")
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-public class DictTask {
+public class DictTask implements Serializable {
     @Id
     private Long id;
 
