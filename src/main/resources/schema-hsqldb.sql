@@ -5,3 +5,10 @@ CREATE TABLE dict_task
     code bigint,
     input_type bigint
 );
+
+CREATE TABLE hot_input
+(
+    id bigint primary key,
+    task_code bigint,
+    input varchar (250)
+);
