@@ -2,7 +2,9 @@ package com.example.twotasksb2.structure.services;
 
 import com.example.twotasksb2.structure.entities.DictTask;
 import com.example.twotasksb2.structure.repositories.DictTaskRepository;
+import com.example.twotasksb2.tasks.TaskEnum;
 import com.example.twotasksb2.tasks.TaskFactory;
+import com.example.twotasksb2.utils.AdapterUtils;
 import com.example.twotasksb2.utils.pojos.Option;
 import com.example.twotasksb2.utils.TaskPojo;
 import lombok.AllArgsConstructor;
@@ -28,8 +30,14 @@ public class TaskService {
         return res == null ? new ResponseEntity<>(HttpStatus.NO_CONTENT) : new ResponseEntity<>(res, HttpStatus.OK);
     }
 
-    public String calculate(Long taskId, TaskPojo pojo){
-        return taskFactory.create(taskId, pojo).calculate();
+    public String calculate(Long taskCode, TaskPojo pojo){
+        return taskFactory.create(taskCode, pojo).calculate();
+    }
+
+    public String calculate(Long taskCode, String json){
+        if (TaskEnum.ARRAYS.getCode().equals(taskCode)) return calculate(taskCode, AdapterUtils.getPojoForTaskOne(json));
+        if (TaskEnum.MAGIC_SQUARE.getCode().equals(taskCode)) return calculate(taskCode, AdapterUtils.getPojoForTaskTwo(json));
+        return "Something went wrong during calculation";
     }
 
     private Long getInputTypeById(Long id){

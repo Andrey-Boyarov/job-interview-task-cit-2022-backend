@@ -34,11 +34,11 @@ public class AdapterUtils {
     /**
      *  Converts JSON to InputOneRequestPojo
      */
-    public static InputOneRequestPojo getPojoForTaskOne(String s){
+    public static InputOneRequestPojo getPojoForTaskOne(String json){
         ObjectMapper mapper = new ObjectMapper();
         InputOneRequestPojo ans = null;
         try {
-            ans = mapper.readValue(s, InputOneRequestPojo.class);
+            ans = mapper.readValue(json, InputOneRequestPojo.class);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
@@ -48,11 +48,11 @@ public class AdapterUtils {
     /**
      *  Converts JSON to InputTwoRequestPojo
      */
-    public static InputTwoRequestPojo getPojoForTaskTwo(String s){
+    public static InputTwoRequestPojo getPojoForTaskTwo(String json){
         ObjectMapper mapper = new ObjectMapper();
         InputTwoRequestPojo ans = null;
         try {
-            ans = mapper.readValue(s, InputTwoRequestPojo.class);
+            ans = mapper.readValue(json, InputTwoRequestPojo.class);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
