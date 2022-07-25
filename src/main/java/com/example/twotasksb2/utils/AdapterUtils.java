@@ -15,22 +15,37 @@ public class AdapterUtils {
     public static List<List<Long>> squareCopyFromInline(List<Long> a){
         int size = (int) Math.sqrt(a.size());
         List<List<Long>> res = new ArrayList<>();
-        for (int i = 0; i < a.size(); i += size) res.add(a.subList(i, i + size));
+        for (int i = 0; i < a.size(); i += size) res.add(List.copyOf(a.subList(i, i + size)));
         return res;
     }
 
     /**
-     *  Returns sorted copy of list of values from square
+     *  Returns copy of list of values from square
      */
     public static List<Long> inlineCopyFromSquare(List<List<Long>> a){
-        return Objects.requireNonNull(List.copyOf(a).stream()
-                .reduce((accum, l) -> {
+        return copySquare(a).stream()
+                .reduce(new ArrayList<>(), (accum, l) -> {
                     accum.addAll(l);
                     return accum;
-                })
-                .orElse(null)).stream()
-                .sorted(Long::compareTo)
-                .collect(Collectors.toList());
+                });
     }
 
+    /**
+     *  Returns string view of square
+     */
+    public static String stringFromSquare(List<List<Long>> a){
+        return a.stream()
+                .map(b -> b.stream()
+                        .map(Object::toString)
+                        .reduce("", (accum, l) -> accum + " " + l))
+                .reduce("", (accum, row) -> accum + row + "\n");
+    }
+
+    private static List<List<Long>> copySquare(List<List<Long>> a){
+        List<List<Long>> res = new ArrayList<>();
+        for (List<Long> t: a) {
+            res.add(List.copyOf(t));
+        }
+        return res;
+    }
 }
