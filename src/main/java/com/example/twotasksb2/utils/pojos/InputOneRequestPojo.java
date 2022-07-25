@@ -19,4 +19,10 @@ public class InputOneRequestPojo implements TaskPojo {
     public List<Option> getTwo(){
         return currentData.getTwo();
     }
+
+    @Getter
+    public static class CurrentDataTaskOne {
+        private List<Option> one;
+        private List<Option> two;
+    }
 }
