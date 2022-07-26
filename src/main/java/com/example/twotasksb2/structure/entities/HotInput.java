@@ -1,12 +1,13 @@
 package com.example.twotasksb2.structure.entities;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
 
+/**
+ *  Entity of input
+ */
 @Entity
 @NoArgsConstructor
 @Table(name = "hot_input")

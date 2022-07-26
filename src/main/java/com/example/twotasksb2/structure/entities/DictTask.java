@@ -9,6 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
 
+/**
+ *  Dictionary for tasks
+ */
 @Table(name = "dict_task")
 @Entity
 @NoArgsConstructor
