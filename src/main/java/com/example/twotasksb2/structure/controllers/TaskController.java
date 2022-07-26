@@ -12,22 +12,43 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ *  Controller to interact with tasks
+ */
 @RestController
 @AllArgsConstructor
 @RequestMapping("/tasks")
 public class TaskController {
     private final TaskService taskService;
 
+    /**
+     *  /tasks/getTasks
+     *
+     *  Get all existing tasks
+     *  @return task labels with codes
+     */
     @GetMapping("/getTasks")
     public List<Option> getTasks(){
         return taskService.getTasks();
     }
 
+    /**
+     *  /tasks/getInputType/{id}
+     *
+     *  Get type of input suitable for task
+     *  @return type of input for this task
+     */
     @GetMapping("/getInputType/{id}")
     public ResponseEntity<Long> getInputType(@PathVariable Long id){
         return taskService.getInputType(id);
     }
 
+    /**
+     *  /tasks/calculate/1
+     *
+     *  Get answer for input and task one
+     *  @return answer
+     */
     @PostMapping("/calculate/1")
     public ResponseEntity<String> calculateTaskOne(
             @RequestBody InputOneRequestPojo pojo
@@ -36,6 +57,12 @@ public class TaskController {
         return new ResponseEntity<>(taskService.calculate(taskId, pojo), HttpStatus.OK);
     }
 
+    /**
+     *  /tasks/calculate/2
+     *
+     *  Get answer for input and task two
+     *  @return answer
+     */
     @PostMapping("/calculate/2")
     public ResponseEntity<String> calculateTaskTwo(
             @RequestBody InputTwoRequestPojo pojo

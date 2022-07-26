@@ -1,9 +1,7 @@
 package com.example.twotasksb2.structure.controllers;
 
 import com.example.twotasksb2.structure.services.TaskService;
-import com.example.twotasksb2.tasks.TaskEnum;
 import com.example.twotasksb2.utils.AdapterUtils;
-import com.example.twotasksb2.utils.TaskPojo;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -14,23 +12,35 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.nio.charset.StandardCharsets;
 
+/**
+ * Controller for file interaction
+ */
 @RestController
 @AllArgsConstructor
 @RequestMapping("/file")
 public class FileController {
     private final TaskService taskService;
 
+    /**
+     *  /file/upload/{taskCode}
+     *
+     *  Upload file with input
+     *  @return answer
+     */
     @PostMapping("/upload/{taskCode}")
     public ResponseEntity<String> uploadData(@PathVariable Long taskCode, @RequestParam("file") MultipartFile file) throws Exception {
         if (file == null) throw new RuntimeException("You must select a file for uploading");
         String json = new String (file.getInputStream().readAllBytes(), StandardCharsets.UTF_8);
-
-        String ans = "Input:\n"
-                + AdapterUtils.beautyVersion(json, taskCode)
-                + "\n\nResult:\n" + taskService.calculate(taskCode, json);
+        String ans = "Input:\n" + AdapterUtils.beautyVersion(json, taskCode) + "\n\nResult:\n" + taskService.calculate(taskCode, json);
         return new ResponseEntity<>(ans, HttpStatus.OK);
     }
 
+    /**
+     *  /file/download
+     *
+     *  Download file with input
+     *  @return file as bytes
+     */
     @PostMapping("/download")
     public ResponseEntity<byte[]> download(@RequestBody String pojo) {
         byte[] data = pojo.getBytes(StandardCharsets.UTF_8);
