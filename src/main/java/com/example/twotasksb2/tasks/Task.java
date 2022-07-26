@@ -1,7 +1,8 @@
 package com.example.twotasksb2.tasks;
 
-import com.example.twotasksb2.structure.entities.DictTask;
-
+/**
+ * Task
+ */
 public interface Task {
     String calculate();
 }

@@ -6,9 +6,16 @@ import com.example.twotasksb2.utils.pojos.InputTwoRequestPojo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
+/**
+ * Factory for tasks creation
+ */
 @Component
 @AllArgsConstructor
 public class TaskFactory {
+
+    /**
+     * Creation
+     */
     public Task create(Long id, TaskPojo input){
         if (TaskEnum.ARRAYS.getCode().equals(id)) {
             return new TaskOne((InputOneRequestPojo) input);
@@ -19,6 +26,9 @@ public class TaskFactory {
         return null;
     }
 
+    /**
+     * In case we try to work with unexisting task
+     */
     private static class NoSuchTaskCodeException extends Exception{
         public NoSuchTaskCodeException(String message){
             super(message);
